@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Builder</title>
+</head>
+<body>
+<h2>فرم‌ساز Camunda</h2>
+
+<form action="/generate-form" method="post">
+    <div id="fields">
+        <div>
+            نام متغیر: <input name="variableNames" required>
+            نوع: 
+            <select name="variableTypes">
+                <option value="String">String</option>
+                <option value="Integer">Integer</option>
+                <option value="Boolean">Boolean</option>
+            </select>
+        </div>
+    </div>
+
+    <button type="button" onclick="addField()">افزودن فیلد</button>
+    <button type="submit">ساخت فرم</button>
+</form>
+
+<p th:text="${message}"></p>
+
+<script>
+function addField() {
+    const fields = document.getElementById("fields");
+    const div = document.createElement("div");
+    div.innerHTML = `نام متغیر: <input name="variableNames" required>
+        نوع:
+        <select name="variableTypes">
+            <option value="String">String</option>
+            <option value="Integer">Integer</option>
+            <option value="Boolean">Boolean</option>
+        </select>`;
+    fields.appendChild(div);
+}
+</script>
+</body>
+</html>
