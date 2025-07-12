@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class FormController {
@@ -28,26 +29,35 @@ public class FormController {
 
         for (int i = 0; i < variableNames.size(); i++) {
             html.append("<input type=\"text\" cam-variable-name=\"")
-                    .append(variableNames.get(i))
+                    .append(escape(variableNames.get(i)))
                     .append("\" cam-variable-type=\"")
-                    .append(variableTypes.get(i))
+                    .append(escape(variableTypes.get(i)))
                     .append("\"><br/>\n");
         }
 
         html.append("<button type=\"submit\">ارسال</button>\n</form>");
 
-        // ساخت فولدر اگر وجود نداشته باشد
+        // ساخت پوشه اگر وجود نداشته باشد
         File folder = new File("src/main/resources/static/forms");
         if (!folder.exists()) {
             folder.mkdirs();
         }
 
-        File output = new File(folder, "generated-form.html");
+        // تولید نام یکتا
+        String formId = UUID.randomUUID().toString();
+        String fileName = "form-" + formId + ".html";
+        File output = new File(folder, fileName);
+
         try (FileWriter writer = new FileWriter(output)) {
             writer.write(html.toString());
         }
 
-        // ریدایرکت به فرم ساخته شده
-        return "redirect:/forms/generated-form.html";
+        // ریدایرکت به فرم ساخته‌شده
+        return "redirect:/forms/" + fileName;
+    }
+
+    // جلوگیری از ورود کد مخرب
+    private String escape(String input) {
+        return input.replaceAll("[<>\"']", "");
     }
 }

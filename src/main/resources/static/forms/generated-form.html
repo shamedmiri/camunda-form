@@ -2,128 +2,182 @@
 <html lang="fa">
 <head>
     <meta charset="UTF-8" />
-    <title>نمایش اطلاعات</title>
+    <title>فرم ورود اطلاعات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap');
 
+        :root {
+          --bg: #ffffff;
+          --text: #222;
+          --input-bg: #f4f4f4;
+          --border: #ccc;
+          --button-bg: #444;
+          --button-hover: #222;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          :root {
+            --bg: #121212;
+            --text: #f0f0f0;
+            --input-bg: #1e1e1e;
+            --border: #444;
+            --button-bg: #666;
+            --button-hover: #888;
+          }
+        }
+
         body {
           font-family: 'Vazirmatn', Tahoma, sans-serif;
-          background: linear-gradient(135deg, #f5f3ff, #ffffff);
-          padding: 40px 20px;
+          background-color: var(--bg);
+          color: var(--text);
           direction: rtl;
-          min-height: 100vh;
+          margin: 0;
+          padding: 0;
           display: flex;
           justify-content: center;
           align-items: center;
-          flex-direction: column;
+          min-height: 100vh;
+          box-sizing: border-box;
         }
 
         .form-container {
-          background: #ffffff;
-          padding: 30px 40px;
-          border-radius: 15px;
-          box-shadow: 0 10px 30px rgba(160, 120, 255, 0.1);
-          max-width: 500px;
+          background-color: var(--bg);
+          padding: 30px 25px;
+          border-radius: 12px;
+          border: 1px solid var(--border);
           width: 100%;
+          max-width: 420px;
           box-sizing: border-box;
-          border: 1px solid #e7e0f8;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          animation: fadeInUp 0.7s ease-out both;
         }
 
-        .info {
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .form-group {
+          margin-bottom: 20px;
           display: flex;
           align-items: center;
-          gap: 12px;
-          background: #f8f5ff;
-          border: 1px solid #e0d4fa;
-          padding: 12px 16px;
-          border-radius: 10px;
-          font-size: 16px;
-          color: #4a3f60;
-          margin-bottom: 20px;
         }
 
-        .info svg {
+        .form-group svg {
           width: 22px;
           height: 22px;
-          color: #8e72b3;
+          margin-left: 10px;
+          color: var(--text);
           flex-shrink: 0;
         }
 
-        .label {
-          font-weight: bold;
-          color: #5a4d7a;
-          margin-left: 6px;
-          min-width: 95px;
+        input {
+          flex: 1;
+          padding: 10px 12px;
+          font-size: 14px;
+          background-color: var(--input-bg);
+          color: var(--text);
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          box-sizing: border-box;
+        }
+
+        input[type="text"] {
+          direction: rtl;
+        }
+
+        input[type="number"] {
+          direction: ltr;
         }
 
         button {
-          background-color: #c084fc;
+          width: 100%;
+          padding: 12px;
+          background-color: var(--button-bg);
           color: white;
           border: none;
-          padding: 14px;
-          font-size: 17px;
-          border-radius: 8px;
+          border-radius: 6px;
+          font-size: 16px;
           cursor: pointer;
-          transition: background-color 0.3s ease, box-shadow 0.3s ease;
-          width: 100%;
+          transition: background-color 0.2s ease-in-out;
+          margin-top: 10px;
         }
 
         button:hover {
-          background-color: #a855f7;
-          box-shadow: 0 4px 12px rgba(192, 132, 252, 0.4);
+          background-color: var(--button-hover);
         }
 
         .logo-container {
-          margin-top: 30px;
           text-align: center;
+          margin-top: 30px;
         }
 
         .logo-container img {
-          width: 90px;
+          width: 100px;
+          height: 100px;
           border-radius: 50%;
-          opacity: 0.95;
-          filter: drop-shadow(0 2px 5px rgba(130, 100, 200, 0.15));
+          opacity: 0.9;
+          object-fit: cover;
+        }
+
+        @media screen and (max-width: 480px) {
+          .form-container {
+            padding: 20px;
+            border-radius: 8px;
+          }
+
+          .logo-container img {
+            width: 80px;
+            height: 80px;
+          }
         }
     </style>
 </head>
 <body>
 
 <div class="form-container">
-    <div class="info">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0"/>
-        </svg>
-        <span class="label">نام خانوادگی:</span> <span id="last_name">در حال بارگذاری...</span>
+    <div>
+        <div class="form-group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0" />
+            </svg>
+            <input id="last_name" type="text" placeholder="نام خانوادگی (مثلاً رضایی)" />
+        </div>
+        <div class="form-group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-width="1.5" d="M21.75 6.75L12 13.5 2.25 6.75M3.75 5.25h16.5A1.5 1.5 0 0121.75 6.75v10.5a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V6.75A1.5 1.5 0 013.75 5.25z" />
+            </svg>
+            <input id="email" type="text" placeholder="ایمیل (مثلاً example@email.com)" />
+        </div>
+        <div class="form-group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-width="1.5" d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2zm5 18.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+            </svg>
+            <input id="phone_number" type="text" placeholder="شماره تماس (مثلاً 09121234567)" />
+        </div>
+        <button id="completeBtn">ثبت نام</button>
     </div>
 
-    <div class="info">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-width="1.5" d="M21.75 6.75L12 13.5 2.25 6.75M3.75 5.25h16.5A1.5 1.5 0 0121.75 6.75v10.5a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V6.75A1.5 1.5 0 013.75 5.25z"/>
-        </svg>
-        <span class="label">ایمیل:</span> <span id="email">در حال بارگذاری...</span>
+    <div class="logo-container">
+        <img src="https://cdn-icons-png.flaticon.com/512/1547/1547616.png" alt="ثبت‌نام کاربر" />
     </div>
-
-    <button id="completeBtn">تأیید و ادامه</button>
 </div>
-
-<div class="logo-container">
-    <img src="https://cdn-icons-png.flaticon.com/512/1547/1547616.png" alt="لوگو بانک" /></div>
 
 <script>
     function getTaskId() {
       const params = new URLSearchParams(window.location.search);
       return params.get('taskId');
-    }
-
-    async function loadTaskVariables(taskId) {
-      try {
-        const response = await fetch(`http://localhost:8081/engine-rest/task/${taskId}/variables`);
-        const variables = await response.json();
-        document.getElementById('last_name').innerText = variables.last_name?.value || '-';
-        document.getElementById('email').innerText = variables.email?.value || '-';
-      } catch (err) {
-        alert("خطا در دریافت اطلاعات: " + err.message);
-      }
     }
 
     document.getElementById('completeBtn').addEventListener('click', async function () {
@@ -132,12 +186,29 @@
         alert("taskId یافت نشد!");
         return;
       }
+
+      const lastName = document.getElementById('last_name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone_number').value.trim();
+
+      if (!lastName || !email || !phone) {
+        alert("لطفاً تمام فیلدها را تکمیل کنید.");
+        return;
+      }
+
       try {
         const response = await fetch(`http://localhost:8081/engine-rest/task/${taskId}/complete`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({})
+          body: JSON.stringify({
+            variables: {
+              last_name: { value: lastName, type: "String" },
+              email: { value: email, type: "String" },
+              phone_number: { value: phone, type: "String" }
+            }
+          })
         });
+
         if (response.ok) {
           alert("تسک با موفقیت کامل شد!");
         } else {
@@ -148,13 +219,6 @@
         alert("خطا در ارسال درخواست: " + err.message);
       }
     });
-
-    const taskId = getTaskId();
-    if (taskId) {
-      loadTaskVariables(taskId);
-    } else {
-      alert("شناسه تسک موجود نیست!");
-    }
 </script>
 
 </body>
